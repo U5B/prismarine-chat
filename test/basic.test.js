@@ -9,7 +9,9 @@ test('Parsing message that uses language file & numbers', () => {
   // test as a string
   expect(msg.toString()).toBe('[ripwhitescrolls: Removed 256 items from 2 players]')
   // test as ansi
-  expect(msg.toAnsi()).toBe('\u001b[37m\u001b[3m[ripwhitescrolls\u001b[0m: Removed 256\u001b[0m items from 2\u001b[0m players]\u001b[0m')
+  expect(msg.toAnsi()).toBe('\u001b[37m\u001b[3m[ripwhitescrolls: Removed 256 items from 2 players]\u001b[0m')
+  // test as motd
+  expect(msg.toMotd()).toBe('§7§o[ripwhitescrolls: Removed 256 items from 2 players]')
   // test clickEvent
   expect(msg.with[0].clickEvent.action).toBe('suggest_command')
   expect(msg.with[0].clickEvent.value).toBe('/tell ripwhitescrolls ')
@@ -23,11 +25,11 @@ test('Parsing a chat message which is an array', () => {
 })
 test('Chat Message with a single hex color', () => {
   const msg = new ChatMessage({ text: 'uwu', color: '#FF0000' })
-  expect(msg.toMotd()).toBe('§#FF0000uwu§r')
-  expect(msg.toAnsi()).toBe('\u001B[38;2;255;0;0muwu\u001B[0m\u001B[0m')
+  expect(msg.toMotd()).toBe('§#FF0000uwu')
+  expect(msg.toAnsi()).toBe('\u001B[38;2;255;0;0muwu\u001B[0m')
 })
 test('Chat Message with multiple hex colors', () => {
   const msg = new ChatMessage(['', { text: 'uwu ', color: '#FF0000' }, { text: 'owo ', color: '#0000FF' }, { text: 'uwu', color: '#FF0000' }])
-  expect(msg.toMotd()).toBe('§r§#FF0000uwu §r§#0000FFowo §r§#FF0000uwu§r')
-  expect(msg.toAnsi()).toBe('\u001B[0m\u001B[38;2;255;0;0muwu \u001B[0m\u001B[38;2;0;0;255mowo \u001B[0m\u001B[38;2;255;0;0muwu\u001B[0m\u001B[0m')
+  expect(msg.toMotd()).toBe('§#FF0000uwu §#0000FFowo §#FF0000uwu')
+  expect(msg.toAnsi()).toBe('\u001B[38;2;255;0;0muwu \u001B[38;2;0;0;255mowo \u001B[38;2;255;0;0muwu\u001B[0m')
 })
