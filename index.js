@@ -311,7 +311,7 @@ class ChatMessage {
       return codes[code]
     }).join('')
 
-    if (typeof this.text === 'string' || typeof this.text === 'number') message += `${this.text}`
+    if (typeof this.text === 'string' || typeof this.text === 'number') message += `${this.text}§r`
     else if (this.with) {
       const args = this.with.map(entry => entry.toMotd(lang))
       const format = lang[this.translate]
