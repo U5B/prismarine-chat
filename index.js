@@ -302,6 +302,7 @@ class ChatMessage {
 
     let message = Object.keys(codes).map((code) => {
       this[code] = this[code] || parent[code]
+      // U5B edit: don't add empty strings to the message
       if (!this[code] || this[code] === 'false' || this.text === '') return null
       if (code === 'color') {
         // return hex codes in this format
@@ -311,6 +312,7 @@ class ChatMessage {
       return codes[code]
     }).join('')
 
+    // U5B edit: don't add empty strings to the message
     if ((typeof this.text === 'string' || typeof this.text === 'number') && this.text !== '') message += `${this.text}§r`
     else if (this.with) {
       const args = this.with.map(entry => entry.toMotd(lang))
