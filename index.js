@@ -255,9 +255,15 @@ function loader (mcVersion) {
         const args = this.with.map(entry => entry.toString(lang))
         const format = lang[this.translate]
         if (!format) message += args.join('')
-        else message += vsprintf(format, args)
+        else {
+          try { // prevent translate crashes
+            message += vsprintf(format, args)
+          } catch {
+            message += args.join('')
+          }
+        }
       } else if (this.translate) {
-        message += lang[this.translate]
+        message += lang[this.translate] ?? this.translate // prevent translate crashes
       }
       if (this.extra) {
         message += this.extra.map((entry) => entry.toString(lang)).join('')
@@ -314,9 +320,15 @@ function loader (mcVersion) {
         const args = this.with.map(entry => entry.toMotd(lang))
         const format = lang[this.translate]
         if (!format) message += args.join('')
-        else message += vsprintf(format, args)
+        else {
+          try { // prevent translate crashes
+            message += vsprintf(format, args)
+          } catch {
+            message += args.join('')
+          }
+        }
       } else if (this.translate) {
-        message += lang[this.translate]
+        message += lang[this.translate] ?? this.translate // prevent translate crashes
       }
       if (this.extra) {
         message += this.extra.map(entry => entry.toMotd(lang, this)).join('')
