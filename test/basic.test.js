@@ -33,6 +33,6 @@ it('Chat Message with a single hex color', () => {
 })
 it('Chat Message with multiple hex colors', () => {
   const msg = new ChatMessage(['', { text: 'uwu ', color: '#FF0000' }, { text: 'owo ', color: '#0000FF' }, { text: 'uwu', color: '#FF0000' }])
-  expect(msg.toMotd()).toBe('§#FF0000uwu §#0000FFowo §#FF0000uwu')
-  expect(msg.toAnsi()).toBe('\u001B[38;2;255;0;0muwu \u001B[38;2;0;0;255mowo \u001B[38;2;255;0;0muwu\u001B[0m')
+  expect(msg.toMotd()).toBe('§#FF0000uwu §r§#0000FFowo §r§#FF0000uwu§r')
+  expect(msg.toAnsi()).toBe('\u001B[38;2;255;0;0muwu \u001B[0m\u001B[38;2;0;0;255mowo \u001B[0m\u001B[38;2;255;0;0muwu\u001B[0m\u001B[0m')
 })
